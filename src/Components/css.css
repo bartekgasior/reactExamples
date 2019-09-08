@@ -1,0 +1,53 @@
+.class1{
+    background-color: lightcoral;
+}
+
+
+.progressbar .progress {
+    background-color: green;
+    border-radius: 4px;
+    transition: width 1000ms ease-in-out;
+    height: 100%;
+}
+  
+.progressbar {
+    width: 500px;
+    height: 30px;
+    border-radius: 4px;
+    background-color: lightgrey;
+}
+
+.inline {
+      float: left;
+}
+
+.container{
+    background: indianred;
+    width: 100%;
+    overflow: hidden;
+    color: white;
+}
+
+.tableBorder {
+    padding: 5px;
+    border-spacing: 0px;
+}
+.tableBorder thead tr th, .tableBorder tbody tr td{
+    border: 1px solid black;
+}
+
+.tableBorder td {
+    width: 50px;
+    height: 20px;
+}
+
+.tableBorder td  > div{
+    background-color: red;
+}
+
+.inputChanged {
+    background-color: red;
+    width: 100%;
+    height: 100%;
+}
+
