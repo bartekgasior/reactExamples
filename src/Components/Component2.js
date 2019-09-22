@@ -1,5 +1,5 @@
 import React from 'react';
-import { Transition, Spring, animated } from 'react-spring/renderprops';
+import { Transition, animated } from 'react-spring/renderprops';
 import './css.css';
 import Sub from './SubComponent2_1.js';
 
@@ -10,11 +10,11 @@ const divStyle = {
     height: '100%'
 }
 
-const c1style = {
+/*const c1style = {
     background: 'steelblue',
     color: 'white',
     padding: '1.5rem'
-}
+}*/
 
 const duration = 200;
 
@@ -92,9 +92,9 @@ class Component2 extends React.Component {
 
 
             for (let i = startingID; i < id; i++) {
-                var delays = this.state.delay;
+                let delays = this.state.delay;
                 delays[i] = (i - startingID) * duration;
-                var tmp = this.state.colorRow;
+                let tmp = this.state.colorRow;
                 tmp[i] = true;
                 timeout += duration;
                 this.setState({ colorRow: tmp });
@@ -204,7 +204,7 @@ class Component2 extends React.Component {
         if (tmp.length > 6) {
             var tail = tmp.pop();
             var id = tail[0];
-            var value = tail[1];
+           // var value = tail[1];
             var x = null;
             for (let i = (tmp.length - 1); i >= 0; i--) {
                 if (tmp[i][0] === id) {

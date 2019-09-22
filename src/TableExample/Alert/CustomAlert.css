@@ -1,0 +1,86 @@
+.background{
+    background-color: rgb(80,80,80);
+    opacity: 0.75;
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    z-index: 0;
+    top: 0;
+}
+
+.alertContainer{
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.alert{
+    position: absolute;
+    z-index: 5;
+    border: 1px solid black;
+    background-image: linear-gradient(to bottom, rgb(50,50,50), rgb(0,0,0));
+    width: 40%;
+    height: 200px;
+    left: 30%;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.alertXButton{
+    width: 100%;
+    height: 20%;
+    color: lightgray; 
+    font-size: 30px;
+    vertical-align: top;
+}
+
+.alertXButton div{
+    height: 100%;
+    width: 100%;
+    text-align: right;
+}
+
+
+.alertXButton div label{
+    cursor: pointer;
+}
+
+.main {
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+    display: inline-block;
+    color: lightgrey;
+    text-align: center;
+}
+
+.main .textContainer{
+    height: 70%;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.main .mainButtonContainer{
+    height:30%;
+}
+
+.main .mainButton{
+    font-size: 20px;
+    height: 50%;
+    background-color: transparent;
+    color:lightgray; 
+    width: 20%;
+    padding: 0;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+.main .mainButton:hover{
+    background-color: lightgray;
+    color: black; 
+    font-weight: bold;
+    border: 1px solid black;
+}

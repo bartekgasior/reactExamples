@@ -1,0 +1,14 @@
+#tableComponent td, th{
+    border: 1px solid black;
+    padding: 0;
+    width: 150px;
+    height: 40px;
+}
+
+#tableComponent{
+    border-spacing: 0;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Transition, Spring, animated } from 'react-spring/renderprops';
+import { Transition, animated } from 'react-spring/renderprops';
 
 export default class SubComponent2_1 extends React.PureComponent {
     constructor(props) {

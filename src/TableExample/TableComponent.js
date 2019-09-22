@@ -1,0 +1,119 @@
+import React from 'react';
+import './css.css';
+import Select from './Select/CustomSelectComponent.js';
+import Alert from './Alert/CustomAlert.js';
+
+const status1 = {
+    id: 1,
+    namePL: 'st1_pl',
+    nameDE: 'st1_de',
+    nameEN: 'st1_en',
+    red: 168,
+    green: 50,
+    blue: 86,
+    type: 'm2'
+}
+
+const status3 = {
+    id: 35,
+    namePL: 'st3_pl',
+    nameDE: 'st3_de',
+    nameEN: 'st3_en',
+    red: 50,
+    green: 168,
+    blue: 162,
+    type: 'm2'
+}
+
+const status2 = {
+    id: 21,
+    namePL: 'st2_pl',
+    nameDE: 'st2_de',
+    nameEN: 'st2_en',
+    red: 76,
+    green: 168,
+    blue: 50,
+    type: 'm2'
+}
+
+export default class TableComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            statuses: [status1, status2, status3],
+            statusesIDS: [-1, -1, -1, -1, -1],
+            showAlert: false
+        };
+    }
+
+    renderRow = (list) => {
+        var row = [];
+        row.push(
+            list.map((l, index) => {
+                var statID = index % 3;
+                return <td key={index}>
+                    <Select
+                        id={index}
+                        setStatusID={this.setStatusID}
+                        statuses={this.state.statuses}
+                        language={"de"}
+                        currentStatus={this.state.statuses[statID]}
+                        buttonVisible={true}
+                    />
+                </td>
+            })
+        );
+        return row;
+    }
+
+    setStatusID = (id, statusID) => {
+        var tmpArray = this.state.statusesIDS;
+        tmpArray[id] = statusID;
+        this.setState({ statusesIDS: tmpArray }, () => { console.log(this.state.statusesIDS) });
+    }
+
+    toggleAlert = () => {
+        this.setState({ showAlert: !this.state.showAlert });
+    }
+
+    alertOKClicked = () => {
+        this.setState({}, () => {
+            this.toggleAlert(); 
+            console.log('ok clicked!!');
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <table id="tableComponent">
+                    <thead>
+                        <tr>
+                            <th>xx</th>
+                            <th>xx</th>
+                            <th>xx</th>
+                            <th>xx</th>
+                            <th>xx</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            {this.renderRow(this.state.statusesIDS)}
+                        </tr>
+                    </tbody>
+                </table>
+                <button onClick={this.toggleAlert}>
+                    Toggle alert
+                </button>
+                <Alert
+                    show={this.state.showAlert}
+                    toggleAlert={this.toggleAlert}
+                    alertOKClicked={this.alertOKClicked}
+                    from={"top"}
+                    startingMarginValue={-600}
+                    duration={250}
+                />
+            </div>
+        )
+    }
+}

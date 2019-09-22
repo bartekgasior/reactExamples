@@ -4,9 +4,9 @@ import styled, { keyframes } from 'styled-components';
 import './css.css';
 const bounceAnimation = keyframes`${slideInLeft}`;
 
-const BouncyDiv = styled.div`
-  animation: 1s ${bounceAnimation};
-`;
+//const BouncyDiv = styled.div`
+//  animation: 1s ${bounceAnimation};
+//`;
 
 const FComp = (id) =>
     <div>hi {id}</div>
