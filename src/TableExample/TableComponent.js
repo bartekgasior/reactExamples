@@ -2,6 +2,7 @@ import React from 'react';
 import './css.css';
 import Select from './Select/CustomSelectComponent.js';
 import Alert from './Alert/CustomAlert.js';
+import AutoSuggest from './AutoSuggest/AutoSuggestComponent.js';
 
 const status1 = {
     id: 1,
@@ -42,6 +43,8 @@ export default class TableComponent extends React.Component {
         this.state = {
             statuses: [status1, status2, status3],
             statusesIDS: [-1, -1, -1, -1, -1],
+            secondarySuggestions: ['oranges', 'tomatoes2', 'apples', 'tomatoes12', 'toto', 'bananas'],
+            suggestions: ['tomatoes', 'tomatoes1', 'tom', 'tom1', 'tom2', 'potatoes', 'kiwis'],
             showAlert: false
         };
     }
@@ -78,7 +81,7 @@ export default class TableComponent extends React.Component {
 
     alertOKClicked = () => {
         this.setState({}, () => {
-            this.toggleAlert(); 
+            this.toggleAlert();
             console.log('ok clicked!!');
         });
     }
@@ -109,9 +112,14 @@ export default class TableComponent extends React.Component {
                     show={this.state.showAlert}
                     toggleAlert={this.toggleAlert}
                     alertOKClicked={this.alertOKClicked}
-                    from={"top"}
+                    from={"bottom"}
                     startingMarginValue={-600}
                     duration={250}
+                />
+                <AutoSuggest
+                    suggestions={this.state.suggestions}
+                    secondarySuggestions={this.state.secondarySuggestions}
+                    charsToCheck={2}
                 />
             </div>
         )

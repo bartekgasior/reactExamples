@@ -31,7 +31,6 @@ export default class CustomAlert extends React.Component {
         var f = this.props.from;
         var value = this.props.startingMarginValue;
         var x, y, z;
-        var margin;
         if (f.toLowerCase() === 'top') {
             x = 0;
             y = value;

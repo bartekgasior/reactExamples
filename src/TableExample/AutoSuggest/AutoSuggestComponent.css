@@ -1,0 +1,48 @@
+.suggestionsList{
+    list-style-type: none;
+    max-height: 100px;
+    overflow-y: scroll;
+    border: 1px solid black;
+    width: 170px;
+    padding: 0;
+    position: absolute;
+    margin-top: 2px;
+}
+
+.suggestionsList .liElement{
+    text-align: center;
+    background-color: rgb(193, 209, 224);
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+.suggestionsList .liSecondaryElement{
+    text-align: center;
+    background-color: rgb(213, 229, 244);
+    margin-top: 1.5%;
+    margin-bottom: 1.5%;
+}
+
+.suggestionsList .divider{
+    text-align: center;
+    background-color: blue;
+    height: 2px;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.suggestionsList .liElement:hover{
+    background-color: grey;
+    color:white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.suggestionsList .liSecondaryElement:hover{
+    background-color: grey;
+    color:white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
