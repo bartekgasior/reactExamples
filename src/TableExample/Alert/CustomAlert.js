@@ -73,7 +73,6 @@ export default class CustomAlert extends React.Component {
         }
 
         var trans = 'translate3d(' + x + 'px,' + y + 'px,' + z + 'px)';
-        console.log(trans);
         this.setState({
             from: f,
             duration: this.props.duration,

@@ -17,10 +17,18 @@ export default class AutoSuggestComponent extends React.Component {
         }
     }
 
+    componentDidMount = () => {
+        document.addEventListener('click', this.handleClickOutside);
+    }
+
+    componentWillUnmount = () => {
+        document.removeEventListener('click', this.handleClickOutside);
+    }
+
     renderSuggestions = (suggestions, secondarySuggestions, hovered) => {
         if (this.state.showSuggestions && (this.state.filteredSuggestions.length > 0 || this.state.filteredSecondarySuggestions.length > 0)) {
             return (
-                <ul className="suggestionsList" ref ="ulRef">
+                <ul className="suggestionsList" ref="ulRef">
                     {suggestions.map((suggestion, index) => {
                         return (<li
                             className="liElement"
@@ -45,9 +53,10 @@ export default class AutoSuggestComponent extends React.Component {
 
     filterSuggestions = (text, array, charsToCheck) => {
         let suggestions = [];
+        let additionalLength = text.length - charsToCheck;
         array.map(node => {
             let flag = true;
-            for (let i = 0; i < charsToCheck; i++) {
+            for (let i = 0; i < (charsToCheck + additionalLength); i++) {
                 if (node.toLowerCase().charAt(i) !== text.toLowerCase().charAt(i)) {
                     flag = false;
                     break;
@@ -111,7 +120,7 @@ export default class AutoSuggestComponent extends React.Component {
         if (showSuggestions) {
             if (e.keyCode === 38) {
                 if (id > 0) {
-                    ul.children[id].scrollIntoView({block: 'end', behavior: 'smooth'});
+                    ul.children[id].scrollIntoView({ block: 'end', behavior: 'smooth' });
                     hovered[id - 1] = true;
                     this.setState({
                         hoverSuggestion: hovered,
@@ -121,7 +130,7 @@ export default class AutoSuggestComponent extends React.Component {
             } else if (e.keyCode === 40) {
                 if (id < (bothSuggestions.length - 1)) {
 
-                    ul.children[id + 1].scrollIntoView({block: 'end', behavior: 'smooth'});
+                    ul.children[id + 1].scrollIntoView({ block: 'end', behavior: 'smooth' });
                     hovered[id + 1] = true;
                     this.setState({
                         hoverSuggestion: hovered,
@@ -129,18 +138,20 @@ export default class AutoSuggestComponent extends React.Component {
                     });
                 }
             } else if (e.keyCode === 13) {
-                this.setState({ 
+                this.setState({
                     userInput: bothSuggestions[id],
-                    showSuggestions: false
+                    showSuggestions: false,
+                    id: 0
                 });
             }
             else if (e.keyCode === 27) {
-                this.setState({ 
-                    showSuggestions: false
+                this.setState({
+                    showSuggestions: false,
+                    id: 0
                 });
             }
-        }else{
-            if(e.keyCode === 40){
+        } else {
+            if (e.keyCode === 40) {
                 this.setState({
                     showSuggestions: true
                 });
@@ -156,13 +167,31 @@ export default class AutoSuggestComponent extends React.Component {
         });
     }
 
+    showFilteredSuggestions = () => {
+        const { filteredSuggestions, filteredSecondarySuggestions } = this.state;
+        if (filteredSuggestions.length > 0 || filteredSecondarySuggestions.length > 0) {
+            this.setState({ showSuggestions: true });
+        }
+    }
+
+    handleClickOutside = (e) => {
+        if (this.containerRef && !this.containerRef.contains(e.target) && this.state.showSuggestions) {
+            this.setState({ showSuggestions: false });
+        }
+    }
+
+    setContainerRef = (node) => {
+        this.containerRef = node;
+    }
+
     render() {
         return (
-            <div>
+            <div ref={this.setContainerRef}>
                 <input type="text"
                     value={this.state.userInput}
                     onChange={(e) => this.onInputChange(e)}
                     onKeyDown={(e) => this.onKeyDown(e)}
+                    onFocus={this.showFilteredSuggestions}
                 />
                 {this.renderSuggestions(this.state.filteredSuggestions, this.state.filteredSecondarySuggestions, this.state.hoverSuggestion)}
             </div>

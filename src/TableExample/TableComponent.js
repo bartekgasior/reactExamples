@@ -3,6 +3,7 @@ import './css.css';
 import Select from './Select/CustomSelectComponent.js';
 import Alert from './Alert/CustomAlert.js';
 import AutoSuggest from './AutoSuggest/AutoSuggestComponent.js';
+import DatePicker from './DatePicker/DatePicker';
 
 const status1 = {
     id: 1,
@@ -72,7 +73,7 @@ export default class TableComponent extends React.Component {
     setStatusID = (id, statusID) => {
         var tmpArray = this.state.statusesIDS;
         tmpArray[id] = statusID;
-        this.setState({ statusesIDS: tmpArray }, () => { console.log(this.state.statusesIDS) });
+        this.setState({ statusesIDS: tmpArray });
     }
 
     toggleAlert = () => {
@@ -86,9 +87,14 @@ export default class TableComponent extends React.Component {
         });
     }
 
+    forceFullScreen = () => {
+        const ul = this.refs.fullscreen;
+        ul.requestFullscreen();
+    }
+
     render() {
         return (
-            <div>
+            <div ref={"fullscreen"}>
                 <table id="tableComponent">
                     <thead>
                         <tr>
@@ -119,7 +125,17 @@ export default class TableComponent extends React.Component {
                 <AutoSuggest
                     suggestions={this.state.suggestions}
                     secondarySuggestions={this.state.secondarySuggestions}
-                    charsToCheck={2}
+                    charsToCheck={3}
+                />
+                <br />
+                <br />
+                <button onClick={this.forceFullScreen}> full screen </button>
+                <br />
+                <br />
+                <br />
+                <br />
+                <DatePicker
+                    locale={'pl'}
                 />
             </div>
         )
