@@ -7,20 +7,26 @@
     padding: 0;
     position: absolute;
     margin-top: 2px;
+    font-size: 13px;
+    background-color: rgb(52, 53, 52);;
 }
 
 .suggestionsList .liElement{
     text-align: center;
-    background-color: rgb(193, 209, 224);
+    background-color: rgb(102, 103, 102);
+    color: white;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
+    overflow: hidden;
 }
 
 .suggestionsList .liSecondaryElement{
     text-align: center;
-    background-color: rgb(213, 229, 244);
+    background-color: rgb(152, 153, 152);
+    color: white;
     margin-top: 1.5%;
     margin-bottom: 1.5%;
+    overflow: hidden;
 }
 
 .suggestionsList .divider{

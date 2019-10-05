@@ -72,7 +72,21 @@
 
 #datePicker .daysRow .day:hover{
     border-radius: 5px;
-    background-color: rgb(55, 52, 236);
+    background-color: rgb(55, 52, 236) !important;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#datePicker .daysRow .currentDay{
+    border-radius: 5px;
+    background-color: rgb(37, 131, 0) !important;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#datePicker .daysRow .currentDay:hover{
+    border-radius: 5px;
+    background-color: rgb(55, 52, 236) !important;
     font-weight: bold;
     cursor: pointer;
 }

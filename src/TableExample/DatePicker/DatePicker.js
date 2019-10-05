@@ -39,25 +39,35 @@ const DaysNames = ({ weekdays }) =>
         })}
     </div>
 
-const DaysRow = ({ days, onClickFun }) =>
+const DaysRow = ({ days, onClickFun, currentDay, currentWeek }) =>
     <div className="daysRow">
         {days.map((day, index) => {
+            let weekStyle = {};
+            if(days[0] === currentWeek){
+                weekStyle = {
+                    backgroundColor: 'rgb(200, 200, 200)',
+                    borderRadius: '0px'
+                }
+            }
             if (index === 0) {
                 return <div key={index} className="cell weekNumber">{day}</div>
             }
-            if (day === '') { 
-                return <div key={index} className={"cell"}>{day}</div>
+            if (day === '') {
+                return <div key={index} style={weekStyle} className={"cell"}>{day}</div>
             }
-            return <div key={index} onClick={() => onClickFun(day)} className={"cell day"}>{day}</div>
+            if (day === currentDay) {
+                return <div key={index} style={weekStyle} onClick={() => onClickFun(day)} className={"cell currentDay"}>{day}</div>
+            }
+            return <div key={index} style={weekStyle} onClick={() => onClickFun(day)} className={"cell day"}>{day}</div>
         })}
     </div>
 
-export default class DatePicker extends React.PureComponent {
+export default class DatePicker extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showDatePicker: false,
-            currentDate: new Date(),
+            currentDate: null,
             days: [],
             months: [],
             currentMonth: '',
@@ -66,13 +76,17 @@ export default class DatePicker extends React.PureComponent {
     }
 
     componentDidMount = () => {
-        const { locale } = this.props;
+        const { locale, currentDate } = this.props;
         let days = days_de;
         let months = months_de;
 
         if (locale === 'en') { days = days_en; months = months_en; }
         else if (locale === 'pl') { days = days_pl; months = months_pl; }
-        this.setState({ days, months }, () => this.setTopRow());
+        this.setState({
+            days,
+            months,
+            currentDate: currentDate
+        }, () => this.setTopRow());
 
     }
 
@@ -123,7 +137,10 @@ export default class DatePicker extends React.PureComponent {
     }
 
     renderDays = () => {
-        const { currentDate } = this.state;
+        const passedDate = this.props.currentDate;
+        const { highlightDay, highlightWeek, week, year } = this.props;
+        const { currentDate, currentYear } = this.state;
+        const currentMonth = moment(currentDate).month() + 1;
         let rows = [];
         let days = [];
         const daysInMonth = moment(currentDate).daysInMonth();
@@ -132,11 +149,28 @@ export default class DatePicker extends React.PureComponent {
         if (startDay === 0) { startDay = 7; }
         /* how many weeks in month*/
         const weeksInMonth = Math.ceil((daysInMonth + (startDay - 1)) / 7)
+        let passedDay = Number.parseInt(moment(passedDate).format('DD'));
+        let passedMonth = moment(passedDate).month() + 1;
+        let passedYear = moment(passedDate).year();
+        let passedWeek = week;
+
+        if (!highlightDay || currentYear !== passedYear || currentMonth !== passedMonth) {
+            passedDay = -1;
+        }
+
+        if (!highlightWeek || year !== currentYear) {
+            passedWeek = -1;
+        }
 
         days = this.calculateDaysInWeek(startDay, daysInMonth, weeksInMonth);
-
         for (let i = 0; i < weeksInMonth; i++) {
-            rows.push(<DaysRow key={i} days={days[i]} onClickFun={this.onDateClicked} />);
+            rows.push(<DaysRow
+                key={i}
+                days={days[i]}
+                onClickFun={this.onDateClicked}
+                currentDay={passedDay}
+                currentWeek={passedWeek}
+            />);
         }
 
         return rows;
@@ -191,7 +225,7 @@ export default class DatePicker extends React.PureComponent {
     render() {
         const { showDatePicker, currentMonth, currentYear, days } = this.state;
         if (!showDatePicker) {
-            return ( <button onClick={this.toggleDatePicker}>toggle calendar</button> )
+            return (<button onClick={this.toggleDatePicker}>toggle calendar</button>)
         }
         return (
             <div ref={showDatePicker ? this.setContainerRef : null}>

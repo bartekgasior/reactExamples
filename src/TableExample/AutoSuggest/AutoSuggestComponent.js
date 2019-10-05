@@ -32,14 +32,14 @@ export default class AutoSuggestComponent extends React.Component {
                     {suggestions.map((suggestion, index) => {
                         return (<li
                             className="liElement"
-                            style={hovered[index] ? { backgroundColor: 'red' } : {}}
+                            style={hovered[index] ? { backgroundColor: 'rgb(55, 52, 236)' } : {}}
                             key={suggestion}
                             onClick={(e) => this.onElementClick(e)}>{suggestion}</li>)
                     })}
                     {secondarySuggestions.map((suggestion, index) => {
                         return (<li
                             className="liSecondaryElement"
-                            style={hovered[index + (suggestions.length)] ? { backgroundColor: 'rgb(230,120,120)' } : {}}
+                            style={hovered[index + (suggestions.length)] ? { backgroundColor: 'rgb(100, 120, 200)' } : {}}
                             key={suggestion}
                             onClick={(e) => this.onElementClick(e)}>{suggestion}</li>)
                     })}
@@ -53,7 +53,10 @@ export default class AutoSuggestComponent extends React.Component {
 
     filterSuggestions = (text, array, charsToCheck) => {
         let suggestions = [];
-        let additionalLength = text.length - charsToCheck;
+        let additionalLength = 0;
+        if(text.length>2){
+            additionalLength = text.length - charsToCheck;
+        } 
         array.map(node => {
             let flag = true;
             for (let i = 0; i < (charsToCheck + additionalLength); i++) {

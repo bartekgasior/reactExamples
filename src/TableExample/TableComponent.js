@@ -45,8 +45,9 @@ export default class TableComponent extends React.Component {
             statuses: [status1, status2, status3],
             statusesIDS: [-1, -1, -1, -1, -1],
             secondarySuggestions: ['oranges', 'tomatoes2', 'apples', 'tomatoes12', 'toto', 'bananas'],
-            suggestions: ['tomatoes', 'tomatoes1', 'tom', 'tom1', 'tom2', 'potatoes', 'kiwis'],
-            showAlert: false
+            suggestions: ['tomatoes', 'tomatoes1', 'tom tom','tom', 'tom1', 'tom2', 'potatoes', 'kiwis'],
+            showAlert: false,
+            currentDate: new Date()
         };
     }
 
@@ -136,6 +137,11 @@ export default class TableComponent extends React.Component {
                 <br />
                 <DatePicker
                     locale={'pl'}
+                    currentDate={this.state.currentDate}
+                    year={2019}
+                    week={38}
+                    highlightDay={true}
+                    highlightWeek={true}
                 />
             </div>
         )
