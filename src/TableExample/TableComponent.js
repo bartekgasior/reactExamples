@@ -4,6 +4,7 @@ import Select from './Select/CustomSelectComponent.js';
 import Alert from './Alert/CustomAlert.js';
 import AutoSuggest from './AutoSuggest/AutoSuggestComponent.js';
 import DatePicker from './DatePicker/DatePicker';
+import { PacmanSpinner, LoadingText } from './Spinner/Spinner';
 
 const status1 = {
     id: 1,
@@ -45,7 +46,7 @@ export default class TableComponent extends React.Component {
             statuses: [status1, status2, status3],
             statusesIDS: [-1, -1, -1, -1, -1],
             secondarySuggestions: ['oranges', 'tomatoes2', 'apples', 'tomatoes12', 'toto', 'bananas'],
-            suggestions: ['tomatoes', 'tomatoes1', 'tom tom','tom', 'tom1', 'tom2', 'potatoes', 'kiwis'],
+            suggestions: ['tomatoes', 'tomatoes1', 'tom tom', 'tom', 'tom1', 'tom2', 'potatoes', 'kiwis'],
             showAlert: false,
             currentDate: new Date()
         };
@@ -139,10 +140,14 @@ export default class TableComponent extends React.Component {
                     locale={'pl'}
                     currentDate={this.state.currentDate}
                     year={2019}
-                    week={38}
+                    week={43}
                     highlightDay={true}
                     highlightWeek={true}
                 />
+
+                <PacmanSpinner />
+
+                <LoadingText />
             </div>
         )
     }
