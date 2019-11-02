@@ -5,6 +5,7 @@ import Alert from './Alert/CustomAlert.js';
 import AutoSuggest from './AutoSuggest/AutoSuggestComponent.js';
 import DatePicker from './DatePicker/DatePicker';
 import { PacmanSpinner, LoadingText } from './Spinner/Spinner';
+import { FlipableCell } from '../FlipCard/FlipCard';
 
 const status1 = {
     id: 1,
@@ -147,7 +148,15 @@ export default class TableComponent extends React.Component {
 
                 <PacmanSpinner />
 
-                <LoadingText />
+                <br />
+                <br />
+                <br />
+                <br />
+                <FlipableCell
+                    textFront={'front'}
+                    textBack={'back'}
+                    isTooltipVisible={true}
+                />
             </div>
         )
     }
